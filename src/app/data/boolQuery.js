@@ -54,9 +54,8 @@
 			} else if(op === "query_string") {
 				query["default_field"] = field.substring(field.indexOf(".")+1);
 				query["query"] = value;
-			} else if(op === "missing") {
+			} else if(op === "exists") {
 				op = "exists";
-				bool = "must_not";
 				query["field"] = field.substring(field.indexOf(".")+1);
 			} else {
 				query[field.substring(field.indexOf(".")+1)] = value;

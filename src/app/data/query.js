@@ -185,11 +185,11 @@
 			} else if(op === "query_string") {
 				query["default_field"] = field;
 				query["query"] = value;
-			} else if(op === "missing") {
+			} else if(op === "exists") {
 				op = "constant_score"
-				var missing = {}, filter = {};
-				missing["field"] = field;
-				filter["missing"] = missing
+				var exists = {}, filter = {};
+				exists["field"] = field;
+				filter["exists"] = exists
 				query["filter"] = filter;
 			} else {
 				query[field] = value;

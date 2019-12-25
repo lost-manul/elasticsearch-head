@@ -4,3 +4,5 @@
 *.sublime-workspace
 .project
 node_modules
+package-lock.json
+_site/src/chrome_ext

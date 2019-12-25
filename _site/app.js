@@ -1054,11 +1054,11 @@
 			} else if(op === "query_string") {
 				query["default_field"] = field;
 				query["query"] = value;
-			} else if(op === "missing") {
+			} else if(op === "exists") {
 				op = "constant_score"
-				var missing = {}, filter = {};
-				missing["field"] = field;
-				filter["missing"] = missing
+				var exists = {}, filter = {};
+				exists["field"] = field;
+				filter["exists"] = exists
 				query["filter"] = filter;
 			} else {
 				query[field] = value;
@@ -1215,9 +1215,8 @@
 			} else if(op === "query_string") {
 				query["default_field"] = field.substring(field.indexOf(".")+1);
 				query["query"] = value;
-			} else if(op === "missing") {
+			} else if(op === "exists") {
 				op = "exists";
-				bool = "must_not";
 				query["field"] = field.substring(field.indexOf(".")+1);
 			} else {
 				query[field.substring(field.indexOf(".")+1)] = value;
@@ -4043,16 +4042,16 @@
 			} else if(spec.type === '_all') {
 				ops = ["query_string"];
 			} else if(spec.type === 'string' || spec.type === 'text' || spec.type === 'keyword') {
-				ops = ["match", "term", "wildcard", "prefix", "fuzzy", "range", "query_string", "text", "missing"];
+				ops = ["match", "term", "wildcard", "prefix", "fuzzy", "range", "query_string", "text", "exists"];
 			} else if(spec.type === 'long' || spec.type === 'integer' || spec.type === 'float' ||
 					spec.type === 'byte' || spec.type === 'short' || spec.type === 'double') {
-				ops = ["term", "range", "fuzzy", "query_string", "missing"];
+				ops = ["term", "range", "fuzzy", "query_string", "exists"];
 			} else if(spec.type === 'date') {
-				ops = ["term", "range", "fuzzy", "query_string", "missing"];
+				ops = ["term", "range", "fuzzy", "query_string", "exists"];
 			} else if(spec.type === 'geo_point') {
-				ops = ["missing"];
+				ops = ["exists"];
 			} else if(spec.type === 'ip') {
-				ops = ["term", "range", "fuzzy", "query_string", "missing"];
+				ops = ["term", "range", "fuzzy", "query_string", "exists"];
 			} else if(spec.type === 'boolean') {
 				ops = ["term"]
 			}
